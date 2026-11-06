@@ -1,0 +1,9 @@
+.venv
+.git
+.ipynb_checkpoints
+.pytest_cache
+data
+tests
+notebook.ipynb
+**/*.pyc
+__pycache__

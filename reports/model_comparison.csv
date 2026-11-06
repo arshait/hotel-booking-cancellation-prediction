@@ -1,0 +1,5 @@
+model,best_params,cv_roc_auc_mean,cv_roc_auc_std
+hist_gradient_boosting,"{'model__learning_rate': 0.1, 'model__max_depth': 3}",0.7961309462403073,0.06152941310272359
+random_forest,"{'model__max_depth': 16, 'model__min_samples_leaf': 5}",0.7941848622391872,0.051370056887189416
+logistic_regression,{'model__C': 0.1},0.7794524773226023,0.02028990687279008
+decision_tree,{'model__max_depth': 8},0.7509661832177819,0.05586462777399347

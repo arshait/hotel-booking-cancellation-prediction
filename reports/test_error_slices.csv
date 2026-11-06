@@ -1,0 +1,7 @@
+error_type,deposit_type,rows
+correct,No Deposit,12012
+correct,Non Refund,56
+correct,Refundable,10
+false_negative,No Deposit,663
+false_negative,Refundable,3
+false_positive,No Deposit,4702

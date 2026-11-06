@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotel-cancellation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hotel-cancellation
+  template:
+    metadata:
+      labels:
+        app: hotel-cancellation
+    spec:
+      containers:
+        - name: api
+          image: hotel-cancellation-api:midterm
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9696
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9696
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotel-cancellation
+spec:
+  type: ClusterIP
+  selector:
+    app: hotel-cancellation
+  ports:
+    - port: 80
+      targetPort: 9696

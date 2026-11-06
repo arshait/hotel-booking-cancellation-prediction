@@ -1,0 +1,257 @@
+{
+  "seed": 42,
+  "cleaning": {
+    "rows_raw": 119390,
+    "exact_duplicate_rows": 31994,
+    "rows_after_dedup": 87396,
+    "invalid_arrival_dates_removed": 0,
+    "zero_guest_rows_removed": 166,
+    "negative_adr_set_to_missing": 1,
+    "rows_model": 87230,
+    "cancellation_rate": 0.2752378768772211
+  },
+  "split": {
+    "strategy": "chronological by estimated booking date (arrival date minus lead time)",
+    "train_rows": 52338,
+    "validation_rows": 17446,
+    "test_rows": 17446,
+    "train_booking_date_min": "2013-06-24",
+    "train_booking_date_max": "2016-09-21",
+    "validation_booking_date_min": "2016-09-21",
+    "validation_booking_date_max": "2017-01-28",
+    "test_booking_date_min": "2017-01-28",
+    "test_booking_date_max": "2017-08-31",
+    "train_cancellation_rate": 0.2681034812182353,
+    "validation_cancellation_rate": 0.294508769918606,
+    "test_cancellation_rate": 0.27737017081279375
+  },
+  "excluded_columns": [
+    "reservation_status",
+    "reservation_status_date",
+    "assigned_room_type",
+    "booking_changes",
+    "agent",
+    "company"
+  ],
+  "features": [
+    "lead_time",
+    "arrival_date_year",
+    "arrival_date_week_number",
+    "arrival_date_day_of_month",
+    "stays_in_weekend_nights",
+    "stays_in_week_nights",
+    "adults",
+    "children",
+    "babies",
+    "is_repeated_guest",
+    "previous_cancellations",
+    "previous_bookings_not_canceled",
+    "days_in_waiting_list",
+    "adr",
+    "required_car_parking_spaces",
+    "total_of_special_requests",
+    "hotel",
+    "arrival_date_month",
+    "meal",
+    "country",
+    "market_segment",
+    "distribution_channel",
+    "reserved_room_type",
+    "deposit_type",
+    "customer_type"
+  ],
+  "selection_metric": "mean ROC AUC from TimeSeriesSplit on the training period only",
+  "operating_threshold_rule": "threshold on the validation period that maximizes F1 for cancellation",
+  "model_comparison": [
+    {
+      "model": "hist_gradient_boosting",
+      "best_params": {
+        "model__learning_rate": 0.1,
+        "model__max_depth": 3
+      },
+      "cv_roc_auc_mean": 0.7961309462403073,
+      "cv_roc_auc_std": 0.06152941310272359
+    },
+    {
+      "model": "random_forest",
+      "best_params": {
+        "model__max_depth": 16,
+        "model__min_samples_leaf": 5
+      },
+      "cv_roc_auc_mean": 0.7941848622391872,
+      "cv_roc_auc_std": 0.051370056887189416
+    },
+    {
+      "model": "logistic_regression",
+      "best_params": {
+        "model__C": 0.1
+      },
+      "cv_roc_auc_mean": 0.7794524773226023,
+      "cv_roc_auc_std": 0.02028990687279008
+    },
+    {
+      "model": "decision_tree",
+      "best_params": {
+        "model__max_depth": 8
+      },
+      "cv_roc_auc_mean": 0.7509661832177819,
+      "cv_roc_auc_std": 0.05586462777399347
+    }
+  ],
+  "selected_model": "hist_gradient_boosting",
+  "selected_params": {
+    "model__learning_rate": 0.1,
+    "model__max_depth": 3
+  },
+  "threshold": 0.4,
+  "threshold_sweep_validation": [
+    {
+      "threshold": 0.2,
+      "precision": 0.44869139521747314,
+      "recall": 0.9275982872713118,
+      "f1": 0.6048223350253807
+    },
+    {
+      "threshold": 0.25,
+      "precision": 0.4721117569083308,
+      "recall": 0.9011288439081354,
+      "f1": 0.6196052191368351
+    },
+    {
+      "threshold": 0.3,
+      "precision": 0.4905847373637265,
+      "recall": 0.8670688984040482,
+      "f1": 0.6266263450312961
+    },
+    {
+      "threshold": 0.35,
+      "precision": 0.5148766328011611,
+      "recall": 0.8285325029194239,
+      "f1": 0.6350887662240787
+    },
+    {
+      "threshold": 0.4,
+      "precision": 0.5381401617250674,
+      "recall": 0.777150642273258,
+      "f1": 0.6359292881032012
+    },
+    {
+      "threshold": 0.45,
+      "precision": 0.563707729468599,
+      "recall": 0.7267419229272091,
+      "f1": 0.6349260329875871
+    },
+    {
+      "threshold": 0.5,
+      "precision": 0.6027692860996223,
+      "recall": 0.6523939275982873,
+      "f1": 0.6266006168800823
+    },
+    {
+      "threshold": 0.55,
+      "precision": 0.6300847457627119,
+      "recall": 0.578824445309459,
+      "f1": 0.6033678230878474
+    },
+    {
+      "threshold": 0.6,
+      "precision": 0.6505674957739677,
+      "recall": 0.5243285325029194,
+      "f1": 0.5806660200452635
+    },
+    {
+      "threshold": 0.65,
+      "precision": 0.6765945490306265,
+      "recall": 0.46866485013623976,
+      "f1": 0.5537541681039438
+    },
+    {
+      "threshold": 0.7,
+      "precision": 0.6984873949579832,
+      "recall": 0.4044375243285325,
+      "f1": 0.5122642672254406
+    },
+    {
+      "threshold": 0.75,
+      "precision": 0.7159548751007252,
+      "recall": 0.3458544180615025,
+      "f1": 0.4664041994750656
+    },
+    {
+      "threshold": 0.8,
+      "precision": 0.748792270531401,
+      "recall": 0.27150642273258074,
+      "f1": 0.3985144979288673
+    }
+  ],
+  "train_at_selected_threshold": {
+    "roc_auc": 0.9047915688948044,
+    "precision": 0.6859602649006622,
+    "recall": 0.738169897377423,
+    "f1": 0.71110805986544,
+    "threshold": 0.4,
+    "confusion_matrix": {
+      "tn": 33564,
+      "fp": 4742,
+      "fn": 3674,
+      "tp": 10358
+    }
+  },
+  "validation": {
+    "roc_auc": 0.8352603660579954,
+    "precision": 0.5381401617250674,
+    "recall": 0.777150642273258,
+    "f1": 0.6359292881032012,
+    "threshold": 0.4,
+    "confusion_matrix": {
+      "tn": 8881,
+      "fp": 3427,
+      "fn": 1145,
+      "tp": 3993
+    }
+  },
+  "test": {
+    "roc_auc": 0.8264666318270553,
+    "precision": 0.47019718309859154,
+    "recall": 0.8623682579045258,
+    "f1": 0.6085751786495552,
+    "threshold": 0.4,
+    "confusion_matrix": {
+      "tn": 7905,
+      "fp": 4702,
+      "fn": 666,
+      "tp": 4173
+    }
+  },
+  "serialization_check": {
+    "max_abs_probability_difference": 0.0,
+    "rows_checked": 25
+  },
+  "example_request": {
+    "lead_time": 62,
+    "arrival_date_year": 2017,
+    "arrival_date_week_number": 13,
+    "arrival_date_day_of_month": 31,
+    "stays_in_weekend_nights": 1,
+    "stays_in_week_nights": 2,
+    "adults": 2,
+    "children": 0.0,
+    "babies": 0,
+    "is_repeated_guest": 0,
+    "previous_cancellations": 0,
+    "previous_bookings_not_canceled": 0,
+    "days_in_waiting_list": 0,
+    "adr": 110.4,
+    "required_car_parking_spaces": 0,
+    "total_of_special_requests": 0,
+    "hotel": "City Hotel",
+    "arrival_date_month": "March",
+    "meal": "BB",
+    "country": "ITA",
+    "market_segment": "Online TA",
+    "distribution_channel": "TA/TO",
+    "reserved_room_type": "A",
+    "deposit_type": "No Deposit",
+    "customer_type": "Transient"
+  }
+}

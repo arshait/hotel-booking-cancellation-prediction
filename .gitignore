@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+*.py[cod]
+.DS_Store
+Thumbs.db
+
+# Dataset is downloaded by download_data.py
+data/*.csv
+
+# Local experiment noise
+*.log
+.coverage
+htmlcov/
